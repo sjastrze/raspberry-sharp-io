@@ -93,6 +93,7 @@ namespace Raspberry.IO.SerialPeripheralInterface
             clockPin.Write(true);
             Timer.Sleep(syncDelay);
             clockPin.Write(false);
+            Timer.Sleep(syncDelay);
         }
 
         /// <summary>
@@ -169,8 +170,9 @@ namespace Raspberry.IO.SerialPeripheralInterface
             if (misoPin == null)
                 throw new NotSupportedException("No MISO pin has been provided");
 
+            var bit = misoPin.Read(); 
             Synchronize();
-            return misoPin.Read();
+            return bit;
         }
 
         /// <summary>
